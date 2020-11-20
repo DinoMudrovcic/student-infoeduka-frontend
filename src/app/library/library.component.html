@@ -1,0 +1,24 @@
+<div id="table-div" *ngIf="libraries.length > 0">
+    <table class="table table-striped table-responsive-md btn-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Autor</th>
+                <th>Naziv</th>
+                <th>Stanje</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let library of libraries[0]">
+                <th>{{ library.id }}</th>
+                <td>{{ library.author }}</td>
+                <td>{{ library.name }}</td>
+                <td>{{ library.amount }}</td>
+                <td *ngIf="isAdmin">
+                    <button class="button button-success" (click)="onEdit()">Uredi</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

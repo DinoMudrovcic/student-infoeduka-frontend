@@ -1,0 +1,24 @@
+<nav class="navbar navbar-default">
+    <div class="containter-fluid">
+        <div class="navbar-header">
+            <a href="/" class="navbar-brand">Infoeduka</a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <!--<li><a href="#">Početna</a></li>
+                <li><a href="#">Studenti</a></li> -->
+                <li><a routerLink="/library" *ngIf="isAuthenticated">Knjižnica</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown" appDropDown>
+                    <a class="dropdown-toggle" role="button">Opcije <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a>Profile</a></li>
+                        <li><a style="cursor: pointer;" (click)="onLogout()">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
