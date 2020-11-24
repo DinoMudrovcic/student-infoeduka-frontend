@@ -1,3 +1,6 @@
+<div class="row" *ngIf="showEdit">
+    <app-library-edit></app-library-edit>
+</div>
 <div id="table-div" *ngIf="libraries.length > 0">
     <table class="table table-striped table-responsive-md btn-table">
         <thead>

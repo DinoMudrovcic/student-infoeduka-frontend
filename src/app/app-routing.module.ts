@@ -10,16 +10,16 @@ const routes: Routes = [
   {
     path: 'library',
     component: LibraryComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {path: 'new', component: LibraryEditComponent, canActivate: [AuthGuard]}
-    ]
+    canActivate: [AuthGuard]
   },
+ 
+  
   {
     path: 'auth',
     component: AuthComponent
-  }
+  },
 
+  { path: '**', redirectTo: '/library', pathMatch: 'full'},
 
 
 ];

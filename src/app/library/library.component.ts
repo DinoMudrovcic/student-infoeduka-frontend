@@ -11,25 +11,37 @@ import { Library } from './library.model';
     templateUrl: './library.component.html'
 })
 export class LibraryComponent implements OnInit, OnDestroy {
-    private userSub: Subscription = new Subscription();
     libraries: any[] = [];
     isAdmin = false;
+    showEdit = false;
 
-    constructor(private authService: AuthService, private http: HttpClient, private route: ActivatedRoute, private router: Router) {}
+    constructor(private authService: AuthService, private http: HttpClient, private route: ActivatedRoute, private router: Router) {
+
+
+        
+    }
     ngOnDestroy() {
         this.libraries = [];
     }
 
 
     ngOnInit() {
-        this.userSub = this.authService.login.subscribe(user => {
+        const userData: {
+            username: string;
+            _token: string;
+            _tokenExpirationDate: string;
+          } = JSON.parse(localStorage.getItem('userData')!);
+
+        console.log("Stored token is: " + userData._token);
+
+        if (userData) {
             let text: boolean;
             var header = {
                 headers: new HttpHeaders()
-                  .set('Authorization',  `Bearer ` + user?.token)
+                  .set('Authorization',  `Bearer ` + userData._token)
               }
             this.http.get<boolean>(
-                'http://localhost:9001/api/user/role/' + user?.username,
+                'http://localhost:9001/api/user/role/' + userData.username,
                 header
             ).subscribe(data => {
                 this.isAdmin = data;
@@ -41,18 +53,15 @@ export class LibraryComponent implements OnInit, OnDestroy {
             ).subscribe(data => {
                 this.libraries.push(data);
             })
-
-
-          });
-
-        
-          this.userSub.unsubscribe();
+        }
+       
           
     }
 
 
     onEdit() {
-        this.router.navigate(['./new'], {relativeTo: this.route});
+        this.showEdit = !this.showEdit;
+        //this.router.navigate(['edit'], {relativeTo: this.route, state: {isAdmin: this.isAdmin}});
     }
 
 

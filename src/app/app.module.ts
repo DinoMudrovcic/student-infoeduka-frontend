@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LibraryEditComponent } from './library/library-edit/library-edit.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     HeaderComponent,
     DropdownDirective,
     LibraryComponent,
+    LibraryEditComponent,
     AuthComponent
   ],
   imports: [

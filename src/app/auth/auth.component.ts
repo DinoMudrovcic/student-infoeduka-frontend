@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
-import { Login } from './login.model';
+import { AuthResponseData, AuthService } from './auth.service';
 
 @Component({
     selector: 'app-auth',
@@ -23,21 +22,19 @@ export class AuthComponent {
         const username = form.value.username;
         const password = form.value.password;
     
-        let authObs: Observable<Login>;
+        let authObs: Observable<AuthResponseData>;
     
         this.isLoading = true;
     
-        authObs = this.authService._login(username, password);
+       authObs = this.authService.login(username, password);
         
       
         authObs.subscribe(
             resData => {
-                console.log(resData);
                 this.isLoading = false;
                 this.router.navigate(['/library']);
             },
             errorMessage => {
-                console.log(errorMessage);
                 this.error = errorMessage;
                 this.isLoading = false;
             }
